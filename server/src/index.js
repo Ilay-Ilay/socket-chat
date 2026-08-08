@@ -1,17 +1,35 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
+import { clerkMiddleware } from "@clerk/express";
+import webhook from "./webhooks/verify-webhook.js";
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 const APP_URL = process.env.APP_URL;
 
-app.use(express.json());
+// Middleware
+
+app.use(clerkMiddleware());
 
 app.use(cors({ origin: APP_URL }));
 
+// Webhooks
+
+app.post(
+  "/webhooks/clerk",
+
+  express.raw({ type: "application/json" }),
+
+  webhook,
+);
+
 app.use(express.static("public"));
+
+app.use(express.json());
+
+// Health
 
 app.get("/health", (req, res) => {
   res.send("OK");
