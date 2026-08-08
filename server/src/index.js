@@ -18,7 +18,7 @@ app.use(cors({ origin: APP_URL }));
 // Webhooks
 
 app.post(
-  "/webhooks/clerk",
+  "/api/webhooks/clerk",
 
   express.raw({ type: "application/json" }),
 
