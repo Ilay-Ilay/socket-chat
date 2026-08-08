@@ -11,6 +11,8 @@ app.use(express.json());
 
 app.use(cors({ origin: APP_URL }));
 
+app.use(express.static("public"));
+
 app.get("/health", (req, res) => {
   res.send("OK");
 });
