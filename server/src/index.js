@@ -14,7 +14,7 @@ const APP_URL = process.env.APP_URL;
 app.post(
   "/api/webhooks/clerk",
 
-  express.raw({ type: "application/json" }),
+  //   express.raw({ type: "application/json" }),
 
   webhook,
 );
