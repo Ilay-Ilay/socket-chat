@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import webhook from "./webhooks/verify-webhook.js";
+import protectedRouter from "./routes/protected-routes.js";
 
 const app = express();
 
@@ -14,7 +15,7 @@ const APP_URL = process.env.APP_URL;
 app.post(
   "/api/webhooks/clerk",
 
-  //   express.raw({ type: "application/json" }),
+  express.raw({ type: "application/json" }),
 
   webhook,
 );
@@ -28,6 +29,8 @@ app.use(cors({ origin: APP_URL }));
 app.use(express.static("public"));
 
 app.use(express.json());
+
+app.use("/api", protectedRouter);
 
 // Health
 
