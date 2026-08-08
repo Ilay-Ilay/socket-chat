@@ -1,4 +1,4 @@
-import { verifyWebhook } from "@clerk/express";
+import { verifyWebhook } from "@clerk/express/webhooks";
 
 export default async function webhook(req, res) {
   try {
