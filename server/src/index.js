@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use(cors({ origin: APP_URL }));
 
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
+
 app.listen(PORT, () => {
   console.log("APP IS NOW RUNNING ON PORT: ", PORT);
 });
