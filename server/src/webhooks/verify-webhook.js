@@ -8,7 +8,15 @@ export default async function webhook(req, res) {
     const eventType = event.type;
     console.log(eventType);
 
-    console.log(req.data);
+    if (eventType === "user.created") {
+      console.log("NEW USER CREATED");
+    }
+    if (eventType === "user.updated") {
+      console.log("NEW USER UPDATED");
+    }
+    if (eventType === "user.deleted") {
+      console.log("NEW USER DELETED");
+    }
 
     res.sendStatus(200);
   } catch (error) {

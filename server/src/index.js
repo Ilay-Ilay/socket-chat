@@ -9,12 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const APP_URL = process.env.APP_URL;
 
-// Middleware
-
-app.use(clerkMiddleware());
-
-app.use(cors({ origin: APP_URL }));
-
 // Webhooks
 
 app.post(
@@ -24,6 +18,12 @@ app.post(
 
   webhook,
 );
+
+// Middleware
+
+app.use(clerkMiddleware());
+
+app.use(cors({ origin: APP_URL }));
 
 app.use(express.static("public"));
 
