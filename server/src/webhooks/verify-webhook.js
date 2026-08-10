@@ -1,5 +1,5 @@
 import { verifyWebhook } from "@clerk/express/webhooks";
-import { User } from "../db/mongoose";
+import { User } from "../db/mongoose.js";
 
 export default async function webhook(req, res) {
   try {
