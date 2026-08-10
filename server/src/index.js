@@ -4,11 +4,16 @@ import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import webhook from "./webhooks/verify-webhook.js";
 import protectedRouter from "./routes/protected-routes.js";
+import connectDB from "./db/db.js";
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 const APP_URL = process.env.APP_URL;
+
+// DB
+
+await connectDB();
 
 // Webhooks
 
