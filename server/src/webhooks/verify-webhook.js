@@ -4,9 +4,9 @@ export default async function webhook(req, res) {
   try {
     const event = await verifyWebhook(req);
 
-    console.log(event);
     const eventType = event.type;
-    console.log(eventType);
+
+    const data = JSON.parse(req.body.toString());
 
     if (eventType === "user.created") {
       console.log("NEW USER CREATED");
@@ -15,7 +15,7 @@ export default async function webhook(req, res) {
       console.log("NEW USER CREATED");
       console.log("NEW USER CREATED");
       console.log("NEW USER CREATED");
-      console.log(req.data);
+      console.log(data);
     }
     if (eventType === "user.updated") {
       console.log("NEW USER UPDATED");
