@@ -1,10 +1,32 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Landing from "../features/home/Landing";
+import Public from "../layout/Public";
+import Protected from "../layout/protected";
+import Conversations from "../features/conversation/pages/Conversations";
+import Landing from "../features/home/pages/Landing";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Landing />,
+    element: <Public />,
+
+    children: [
+      {
+        path: "/",
+
+        element: <Landing />,
+      },
+    ],
+  },
+
+  {
+    element: <Protected />,
+
+    children: [
+      {
+        path: "/conversations",
+
+        element: <Conversations />,
+      },
+    ],
   },
 ]);
 
