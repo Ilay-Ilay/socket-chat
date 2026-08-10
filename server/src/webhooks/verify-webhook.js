@@ -10,6 +10,12 @@ export default async function webhook(req, res) {
 
     if (eventType === "user.created") {
       console.log("NEW USER CREATED");
+      console.log("NEW USER CREATED");
+      console.log("NEW USER CREATED");
+      console.log("NEW USER CREATED");
+      console.log("NEW USER CREATED");
+      console.log("NEW USER CREATED");
+      console.log(req.data);
     }
     if (eventType === "user.updated") {
       console.log("NEW USER UPDATED");
