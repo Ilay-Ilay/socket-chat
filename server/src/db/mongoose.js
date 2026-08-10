@@ -14,9 +14,15 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
 });
 
-const User = mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);
 
 const conversationSchema = new mongoose.Schema(
   {
@@ -42,7 +48,7 @@ const conversationSchema = new mongoose.Schema(
   },
 );
 
-const Conversation = mongoose.model("Conversation", conversationSchema);
+export const Conversation = mongoose.model("Conversation", conversationSchema);
 
 const messageSchema = new mongoose.Schema(
   {
@@ -94,6 +100,4 @@ const messageSchema = new mongoose.Schema(
   },
 );
 
-const Message = mongoose.model("Message", messageSchema);
-
-export default Message;
+export const Message = mongoose.model("Message", messageSchema);

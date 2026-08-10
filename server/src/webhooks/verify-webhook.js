@@ -1,32 +1,68 @@
 import { verifyWebhook } from "@clerk/express/webhooks";
+import { User } from "../db/mongoose";
 
 export default async function webhook(req, res) {
   try {
     const event = await verifyWebhook(req);
 
-    const eventType = event.type;
+    const user = event.data;
 
-    const data = JSON.parse(req.body.toString());
+    if (event.type === "user.created") {
+      await User.findOneAndUpdate(
+        { clerkId: user.id },
 
-    if (eventType === "user.created") {
-      console.log("NEW USER CREATED");
-      console.log("NEW USER CREATED");
-      console.log("NEW USER CREATED");
-      console.log("NEW USER CREATED");
-      console.log("NEW USER CREATED");
-      console.log("NEW USER CREATED");
-      console.log(data);
+        {
+          clerkId: user.id,
+
+          email: user.email_addresses[0].email_address,
+
+          avatar: user.image_url,
+
+          firstName: user.first_name,
+
+          lastName: user.last_name,
+        },
+
+        {
+          upsert: true,
+
+          new: true,
+        },
+      );
     }
-    if (eventType === "user.updated") {
-      console.log("NEW USER UPDATED");
+
+    if (event.type === "user.updated") {
+      await User.findOneAndUpdate(
+        { clerkId: user.id },
+
+        {
+          email: user.email_addresses[0].email_address,
+
+          firstName: user.first_name,
+
+          lastName: user.last_name,
+
+          avatar: user.image_url,
+        },
+
+        {
+          new: true,
+        },
+      );
     }
-    if (eventType === "user.deleted") {
-      console.log("NEW USER DELETED");
+
+    if (event.type === "user.deleted") {
+      await User.findOneAndDelete({
+        clerkId: user.id,
+      });
     }
 
     res.sendStatus(200);
   } catch (error) {
-    console.error("Webhook verification failed:", error);
-    res.status(400).json({ message: "Webhook verification failed", error });
+    console.error("Webhook processing failed:", error);
+
+    res.status(400).json({
+      message: "Webhook processing failed",
+    });
   }
 }
