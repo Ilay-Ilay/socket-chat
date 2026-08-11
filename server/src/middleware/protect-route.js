@@ -1,12 +1,14 @@
 function protectRoute(req, res, next) {
   try {
-    const { userId } = getAuth(req);
+    const auth = getAuth(req);
 
-    if (!userId) {
+    console.log("AUTH:", auth);
+
+    if (!auth.userId) {
       return res.status(401).send("User not authenticated");
     }
 
-    req.userId = userId;
+    req.userId = auth.userId;
 
     next();
   } catch (error) {
