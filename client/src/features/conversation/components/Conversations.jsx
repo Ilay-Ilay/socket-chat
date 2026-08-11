@@ -20,27 +20,23 @@ function Conversations() {
 
   useEffect(() => {
     if (search.length < 2) {
-      setSearchLoading(false);
-
       return;
     }
-
-    setSearchLoading(true);
 
     const controller = new AbortController();
 
     const timer = setTimeout(async () => {
+      setSearchLoading(true);
+
       try {
         const response = await fetch(
           `/api/users/search?q=${encodeURIComponent(search)}`,
-
           {
             signal: controller.signal,
           },
         );
 
         const data = await response.json();
-
         setResults(data);
       } catch (error) {
         if (error.name !== "AbortError") {
@@ -53,7 +49,6 @@ function Conversations() {
 
     return () => {
       clearTimeout(timer);
-
       controller.abort();
     };
   }, [search]);
@@ -69,9 +64,7 @@ function Conversations() {
           type="text"
           placeholder="Search"
           value={search}
-          onChange={(e) => {
-            handleSearchChange(e);
-          }}
+          onChange={handleSearchChange}
         />
         <button
           className="p-2 rounded-full bg-gray-700 text-white h-8 w-8 flex items-center justify-center"

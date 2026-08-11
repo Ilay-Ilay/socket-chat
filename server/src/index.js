@@ -37,6 +37,8 @@ app.use(express.json());
 
 app.use("/api", protectedRouter);
 
+// Protected routes
+
 // Health
 
 app.get("/health", (req, res) => {
