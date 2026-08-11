@@ -3,7 +3,7 @@ function ResultTab({ user }) {
     <div>
       <div>
         <img
-          className="h-8 w-8 rounded full"
+          className="h-8 w-8 rounded-full"
           src={user.avatar}
           alt={`${user.username || user.firstName} avatar`}
         />
