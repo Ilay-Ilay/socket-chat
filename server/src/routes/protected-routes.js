@@ -14,7 +14,7 @@ router.get("/auth", protectRoute, async (req, res) => {
 
 // Search users by regex
 
-router.get("/search", protectRoute, async (req, res) => {
+router.get("/users/search", protectRoute, async (req, res) => {
   const { q } = req.query;
 
   if (!q || q.length < 2) {
