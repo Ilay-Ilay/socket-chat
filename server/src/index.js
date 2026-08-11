@@ -37,6 +37,10 @@ app.use(express.json());
 
 app.use("/api", protectedRouter);
 
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root: "public" });
+});
+
 // Protected routes
 
 // Health
