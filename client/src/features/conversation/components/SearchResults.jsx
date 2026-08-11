@@ -1,4 +1,5 @@
 import Spinner from "../../../components/Spinner";
+import ResultTab from "./ResultTab";
 
 function SearchResults({ results, isOpen, isLoading }) {
   if (!isOpen) return;
@@ -9,9 +10,9 @@ function SearchResults({ results, isOpen, isLoading }) {
       </div>
     );
   return (
-    <div className="flex h-full">
+    <div className="flex h-full flex-col gap-2">
       {results.length < 0 ? (
-        <p>Results</p>
+        results.map((result) => <ResultTab user={result} />)
       ) : (
         <div className="flex items-center justify-center w-full h-full">
           <p className="text-gray-500">Search results will appear here</p>
