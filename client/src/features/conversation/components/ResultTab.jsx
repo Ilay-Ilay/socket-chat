@@ -7,7 +7,7 @@ function ResultTab({ user }) {
   return (
     <div
       onClick={() => setSelectedUser(user)}
-      className={`${user._id === selectedUser._id ? "bg-gray-100" : ""} "hover:bg-gray-200 rounded-md pointer-events-none cursor-pointer`}
+      className={`${user._id === selectedUser?._id ? "bg-gray-100" : ""} "hover:bg-gray-200 rounded-md cursor-pointer p-2`}
     >
       <div className="flex gap-1">
         <div>
@@ -21,7 +21,7 @@ function ResultTab({ user }) {
           <p className="text-gray-900">
             {user.firstName} {user.lastName}
           </p>
-          <p className="text-gray-600">{user.username}</p>
+          <p className="text-gray-500 text-sm">{user.username}</p>
         </div>
       </div>
     </div>

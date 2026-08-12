@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import SearchResults from "./SearchResults";
+import { useAuth } from "@clerk/react";
 
 function Conversations() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
+  const { getToken } = useAuth();
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -29,9 +31,16 @@ function Conversations() {
       setSearchLoading(true);
 
       try {
+        const token = await getToken();
+        if (!token) return;
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/users/search?q=${encodeURIComponent(search)}`,
+
           {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+
             signal: controller.signal,
           },
         );
@@ -51,7 +60,7 @@ function Conversations() {
       clearTimeout(timer);
       controller.abort();
     };
-  }, [search]);
+  }, [search, getToken]);
 
   return (
     <aside className="flex flex-col p-4 border-r border-gray-300 min-h-screen">

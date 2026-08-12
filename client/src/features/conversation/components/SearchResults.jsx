@@ -2,16 +2,6 @@ import Spinner from "../../../components/Spinner";
 import ResultTab from "./ResultTab";
 
 function SearchResults({ results, isOpen, isLoading }) {
-  console.log("RESULTS:", results);
-  console.log({
-    results,
-
-    length: results.length,
-
-    isOpen,
-
-    isLoading,
-  });
   if (!isOpen) return null;
   if (isLoading)
     return (
