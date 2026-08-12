@@ -1,4 +1,4 @@
-import { Conversation, Message } from "../db/mongoose";
+import { Conversation, Message } from "../db/mongoose.js";
 
 export default async function getConversation(req, res) {
   const { participantId } = req.params;
