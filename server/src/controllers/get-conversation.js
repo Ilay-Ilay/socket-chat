@@ -1,14 +1,26 @@
-import { Conversation, Message } from "../db/mongoose.js";
+import mongoose from "mongoose";
+import { Conversation, Message, User } from "../db/mongoose.js";
 
 export default async function getConversation(req, res) {
   const { participantId } = req.params;
-  console.log("CONVERSATIONS REQUESTED");
-  const userId = req.userId;
+  if (!mongoose.isValidObjectId(participantId)) {
+    return res.status(400).json({
+      message: "Invalid participant ID",
+    });
+  }
 
   try {
+    const currentUser = await User.findOne({
+      clerkId: req.userId,
+    });
+
+    if (!currentUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const conversation = await Conversation.findOne({
       participants: {
-        $all: [userId, participantId],
+        $all: [currentUser._id, participantId],
       },
     });
 
