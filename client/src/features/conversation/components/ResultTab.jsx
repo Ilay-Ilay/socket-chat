@@ -1,6 +1,14 @@
+import { useContext } from "react";
+import UIContext from "../../../context/UIContext";
+
 function ResultTab({ user }) {
+  const { selectedUser, setSelectedUser } = useContext(UIContext);
+
   return (
-    <div className="hover:bg-gray-200 rounded-md">
+    <div
+      onClick={() => setSelectedUser(user)}
+      className={`${user._id === selectedUser._id ? "bg-gray-100" : ""} "hover:bg-gray-200 rounded-md pointer-events-none cursor-pointer`}
+    >
       <div className="flex gap-1">
         <div>
           <img

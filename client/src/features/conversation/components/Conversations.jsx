@@ -30,7 +30,7 @@ function Conversations() {
 
       try {
         const response = await fetch(
-          `/api/users/search?q=${encodeURIComponent(search)}`,
+          `${import.meta.env.VITE_API_URL}/api/users/search?q=${encodeURIComponent(search)}`,
           {
             signal: controller.signal,
           },

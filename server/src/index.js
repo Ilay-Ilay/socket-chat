@@ -9,7 +9,7 @@ import connectDB from "./db/db.js";
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-const APP_URL = process.env.APP_URL;
+const allowedOrigins = ["http://localhost:5173"];
 
 // DB
 
@@ -29,7 +29,11 @@ app.post(
 
 app.use(clerkMiddleware());
 
-app.use(cors({ origin: APP_URL }));
+app.use(
+  cors({
+    origin: allowedOrigins,
+  }),
+);
 
 app.use(express.static("public"));
 
