@@ -1,8 +1,15 @@
 import express from "express";
 import protectRoute from "../middleware/protect-route.js";
 import { User } from "../db/mongoose.js";
+import getConversation from "../controllers/get-conversation.js";
 
 const router = express.Router();
+
+// Get conversation
+
+router.get("/conversations/:participantId", protectRoute, getConversation);
+
+// Get auth
 
 router.get("/auth", protectRoute, async (req, res) => {
   res.status(200).json({
