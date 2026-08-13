@@ -1,7 +1,8 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
-import { clerkMiddleware, verifyToken } from "@clerk/express";
+import { verifyToken } from "@clerk/backend";
+import { clerkMiddleware } from "@clerk/express";
 import webhook from "./webhooks/verify-webhook.js";
 import protectedRouter from "./routes/protected-routes.js";
 import connectDB from "./db/db.js";
