@@ -26,6 +26,8 @@ io.use(async (socket, next) => {
   try {
     const token = socket.handshake.auth.token;
 
+    console.log("Socket auth attempt");
+
     // Verify Clerk token
 
     const userId = await verifyToken(token);
@@ -34,6 +36,7 @@ io.use(async (socket, next) => {
 
     next();
   } catch (error) {
+    console.error("Socket auth failed:", error);
     next(new Error("Unauthorized"));
   }
 });
