@@ -25,6 +25,8 @@ const io = new Server(httpServer, {
 io.use(async (socket, next) => {
   try {
     const token = socket.handshake.auth.token;
+    console.log("TOKEN????////////////////////////");
+    console.log(token);
 
     console.log("Socket auth attempt");
 
