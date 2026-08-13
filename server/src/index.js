@@ -30,7 +30,7 @@ io.use(async (socket, next) => {
     // Verify Clerk token
 
     const verifiedToken = await verifyToken(token, {
-      secretKey: process.env.CLERK_JWT_KEY,
+      jwtKey: process.env.CLERK_JWT_KEY,
     });
 
     socket.userId = verifiedToken.sub;
