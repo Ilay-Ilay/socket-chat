@@ -25,16 +25,14 @@ const io = new Server(httpServer, {
 io.use(async (socket, next) => {
   try {
     const token = socket.handshake.auth.token;
-    console.log("TOKEN????////////////////////////");
-    console.log(token);
-
-    console.log("Socket auth attempt");
 
     // Verify Clerk token
 
-    const userId = await verifyToken(token);
+    const verifiedToken = await verifyToken(token, {
+      secretKey: process.env.CLERK_JWT_KEY,
+    });
 
-    socket.userId = userId;
+    socket.userId = verifiedToken.sub;
 
     next();
   } catch (error) {
