@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import SearchResults from "./SearchResults";
 import { useAuth } from "@clerk/react";
+import Navigation from "../../../components/Navigation";
 
 function Conversations() {
   const [search, setSearch] = useState("");
@@ -63,7 +64,9 @@ function Conversations() {
   }, [search, getToken]);
 
   return (
-    <aside className="flex flex-col p-4 border-r border-gray-300 min-h-screen">
+    <aside className="flex w-80 shrink-0 flex-col overflow-hidden border-r border-gray-300 p-4">
+      <Navigation />
+
       <div className="flex items-center p-2 border border-gray-300 rounded-full">
         <input
           onFocus={() => {

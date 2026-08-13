@@ -1,7 +1,6 @@
 import { useAuth } from "@clerk/react";
 
 import { Navigate, Outlet } from "react-router-dom";
-import Navigation from "../components/Navigation";
 
 export default function Protected() {
   const { isLoaded, isSignedIn } = useAuth();
@@ -15,9 +14,10 @@ export default function Protected() {
   }
 
   return (
-    <>
-      <Navigation />
-      <Outlet />
-    </>
+    <div className="flex h-screen overflow-hidden">
+      <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <Outlet />
+      </main>
+    </div>
   );
 }

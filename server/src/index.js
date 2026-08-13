@@ -5,15 +5,46 @@ import { clerkMiddleware } from "@clerk/express";
 import webhook from "./webhooks/verify-webhook.js";
 import protectedRouter from "./routes/protected-routes.js";
 import connectDB from "./db/db.js";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import initializeSocket from "./socket/socket.js";
 
 const app = express();
+
+const httpServer = createServer(app);
 
 const PORT = process.env.PORT || 3000;
 const allowedOrigins = ["http://localhost:5173"];
 
+const io = new Server(httpServer, {
+  cors: {
+    origin: allowedOrigins,
+  },
+});
+
+io.use(async (socket, next) => {
+  try {
+    const token = socket.handshake.auth.token;
+
+    // Verify Clerk token
+
+    const userId = await verifyToken(token);
+
+    socket.userId = userId;
+
+    next();
+  } catch (error) {
+    next(new Error("Unauthorized"));
+  }
+});
+
 // DB
 
 await connectDB();
+
+// Run socket
+
+initializeSocket(io);
 
 // Webhooks
 
@@ -53,6 +84,6 @@ app.get("/{*any}", (req, res) => {
   res.sendFile("index.html", { root: "public" });
 });
 
-app.listen(PORT, () => {
-  console.log("APP IS NOW RUNNING ON PORT: ", PORT);
+httpServer.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });
