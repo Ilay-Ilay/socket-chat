@@ -32,9 +32,7 @@ const conversationSchema = new mongoose.Schema(
   {
     participants: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-
-        ref: "User",
+        type: String,
 
         required: true,
       },
@@ -64,16 +62,19 @@ const messageSchema = new mongoose.Schema(
       required: true,
     },
 
-    sender: {
-      type: mongoose.Schema.Types.ObjectId,
-
-      ref: "User",
+    senderId: {
+      type: String,
 
       required: true,
     },
 
-    text: {
+    content: {
       type: String,
+    },
+    recipientId: {
+      type: String,
+
+      required: true,
     },
 
     attachments: [

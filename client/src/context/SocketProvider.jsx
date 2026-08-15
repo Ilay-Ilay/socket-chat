@@ -27,7 +27,9 @@ function SocketProvider({ children }) {
   }, [getToken]);
 
   return (
-    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket }}>
+      {children}
+    </SocketContext.Provider>
   );
 }
 

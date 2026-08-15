@@ -36,7 +36,7 @@ router.get("/users/search", protectRoute, async (req, res) => {
         { username: { $regex: q, $options: "i" } },
       ],
     })
-      .select("username firstName lastName avatar")
+      .select("username firstName lastName avatar clerkId")
       .limit(20);
 
     res.status(200).json(users);

@@ -2,10 +2,10 @@ import { useState } from "react";
 import UIContext from "./UIContext";
 
 function UIProvider({ children }) {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [recipient, setRecipient] = useState(null);
 
   return (
-    <UIContext.Provider value={{ selectedUser, setSelectedUser }}>
+    <UIContext.Provider value={{ recipient, setRecipient }}>
       {children}
     </UIContext.Provider>
   );

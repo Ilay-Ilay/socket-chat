@@ -5,11 +5,11 @@ import Spinner from "../../../components/Spinner";
 import ChatInput from "./ChatInput";
 
 function Chat() {
-  const { selectedUser } = useContext(UIContext);
+  const { recipient } = useContext(UIContext);
 
   const { data: conversation, isLoading } = useConversation();
 
-  if (!selectedUser) {
+  if (!recipient) {
     return (
       <main className="flex items-center justify-center flex-1">
         <p className="text-gray-500">Select a chat</p>
