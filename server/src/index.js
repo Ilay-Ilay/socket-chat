@@ -23,11 +23,11 @@ const io = new Server(httpServer, {
   },
 });
 
+// Socket verification middleware
+
 io.use(async (socket, next) => {
   try {
     const token = socket.handshake.auth.token;
-
-    // Verify Clerk token
 
     const verifiedToken = await verifyToken(token, {
       jwtKey: process.env.CLERK_JWT_KEY,
