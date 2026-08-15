@@ -1,4 +1,4 @@
-import { Conversation, Message } from "../db/mongoose";
+import { Conversation, Message } from "../db/mongoose.js";
 
 export default function initializeSocket(io) {
   io.on("connection", (socket) => {
