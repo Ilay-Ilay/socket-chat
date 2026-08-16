@@ -2,25 +2,20 @@ import mongoose from "mongoose";
 import { Conversation, Message, User } from "../db/mongoose.js";
 
 export default async function getConversation(req, res) {
-  const { participantId } = req.params;
-  if (!mongoose.isValidObjectId(participantId)) {
-    return res.status(400).json({
-      message: "Invalid participant ID",
-    });
-  }
+  const { recipientId } = req.params;
 
   try {
-    const currentUser = await User.findOne({
+    const user = await User.findOne({
       clerkId: req.userId,
     });
 
-    if (!currentUser) {
+    if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     const conversation = await Conversation.findOne({
       participants: {
-        $all: [currentUser._id, participantId],
+        $all: [user.clerkId, recipientId],
       },
     });
 

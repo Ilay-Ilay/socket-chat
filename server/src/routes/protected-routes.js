@@ -12,7 +12,7 @@ router.get("/conversations", getConversations);
 
 // Get conversation
 
-router.get("/conversation/:participantId", getConversation);
+router.get("/conversation/:recipientId", getConversation);
 
 // Get auth
 
