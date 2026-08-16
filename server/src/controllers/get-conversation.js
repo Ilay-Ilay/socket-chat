@@ -24,7 +24,7 @@ export default async function getConversation(req, res) {
     }
 
     const messages = await Message.find({
-      conversation: conversation._id,
+      conversationId: conversation._id,
     }).sort({ createdAt: 1 });
 
     return res.json({

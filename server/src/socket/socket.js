@@ -2,11 +2,11 @@ import { Conversation, Message } from "../db/mongoose.js";
 
 export default function initializeSocket(io) {
   io.on("connection", (socket) => {
-    console.log("Socket connected:", socket.id);
-
     socket.on("sendMessage", async (data) => {
       const senderId = socket.userId;
       const { recipientId, content } = data;
+
+      console.log(data);
 
       try {
         let conversation = await Conversation.findOne({
@@ -20,7 +20,7 @@ export default function initializeSocket(io) {
           });
         }
         const newMessage = await Message.create({
-          conversation: conversation._id,
+          conversationId: conversation._id,
 
           senderId,
 
