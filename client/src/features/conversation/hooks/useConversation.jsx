@@ -5,15 +5,15 @@ import UIContext from "../../../context/UIContext";
 import getConversation from "../utils/getConversation";
 
 function useConversation() {
-  const { selectedUser } = useContext(UIContext);
+  const { recipient } = useContext(UIContext);
   const { getToken } = useAuth();
 
   return useQuery({
-    queryKey: ["conversation", selectedUser?._id],
+    queryKey: ["conversation", recipient?.clerkId],
 
-    queryFn: () => getConversation(selectedUser._id, getToken),
+    queryFn: () => getConversation(recipient.clerkId, getToken),
 
-    enabled: !!selectedUser,
+    enabled: !!recipient,
   });
 }
 

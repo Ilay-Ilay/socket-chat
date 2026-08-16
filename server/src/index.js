@@ -9,6 +9,7 @@ import connectDB from "./db/db.js";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import initializeSocket from "./socket/socket.js";
+import protectRoute from "./middleware/protect-route.js";
 
 const app = express();
 
@@ -82,7 +83,7 @@ app.get("/health", (req, res) => {
 
 // Protected routes
 
-app.use("/api", protectedRouter);
+app.use("/api", protectRoute, protectedRouter);
 
 app.get("/{*any}", (req, res) => {
   res.sendFile("index.html", { root: "public" });

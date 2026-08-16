@@ -1,13 +1,12 @@
 import SocketProvider from "../../../context/SocketProvider";
 import Chat from "../components/Chat";
-import Conversations from "../components/Conversations";
+import Sidebar from "../components/Sidebar";
 
 function Conversation() {
   return (
     <SocketProvider>
       <div className="flex min-h-0 flex-1 overflow-hidden">
-        <Conversations />
-
+        <Sidebar />
         <Chat />
       </div>
     </SocketProvider>

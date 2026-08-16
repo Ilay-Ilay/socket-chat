@@ -54,7 +54,7 @@ export const Conversation = mongoose.model("Conversation", conversationSchema);
 
 const messageSchema = new mongoose.Schema(
   {
-    conversation: {
+    conversationId: {
       type: mongoose.Schema.Types.ObjectId,
 
       ref: "Conversation",

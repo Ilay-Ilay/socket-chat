@@ -13,9 +13,9 @@ function ChatInput() {
     if (!message.trim()) return;
     if (!socket.current) return;
     if (!recipient) return;
-
+    console.log(recipient.clerkId);
     socket.current.emit("sendMessage", {
-      recipientId: recipient,
+      recipientId: recipient.clerkId,
       content: message,
     });
 

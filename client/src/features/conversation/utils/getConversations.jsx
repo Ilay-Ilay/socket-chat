@@ -1,4 +1,4 @@
-async function getConversation(recipientId, getToken) {
+async function getConversations(getToken) {
   try {
     const token = await getToken();
 
@@ -7,7 +7,7 @@ async function getConversation(recipientId, getToken) {
     }
 
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/conversation/${recipientId}`,
+      `${import.meta.env.VITE_API_URL}/api/conversations}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -26,4 +26,4 @@ async function getConversation(recipientId, getToken) {
   }
 }
 
-export default getConversation;
+export default getConversations;
