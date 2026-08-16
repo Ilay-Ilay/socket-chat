@@ -2,6 +2,7 @@ import express from "express";
 import protectRoute from "../middleware/protect-route.js";
 import { User } from "../db/mongoose.js";
 import getConversation from "../controllers/get-conversation.js";
+import getConversations from "../controllers/get-conversations.js";
 
 const router = express.Router();
 
