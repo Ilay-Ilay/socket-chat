@@ -5,15 +5,13 @@ export default async function getConversations(req, res) {
 
   try {
     const conversations = await Conversation.aggregate([
-      // 1. Find conversations where the current user participates
-
       {
         $match: {
           participants: userId,
         },
       },
 
-      // 2. Get the other participant's User document
+      // join with users
 
       {
         $lookup: {
@@ -24,6 +22,52 @@ export default async function getConversations(req, res) {
           foreignField: "clerkId",
 
           as: "participants",
+        },
+      },
+
+      //   filter out recipients
+
+      {
+        $set: {
+          recipient: {
+            $arrayElemAt: [
+              {
+                $filter: {
+                  input: "$participants",
+
+                  cond: { $ne: ["$$this.clerkId", userId] },
+                },
+              },
+
+              0,
+            ],
+          },
+        },
+      },
+
+      {
+        $lookup: {
+          from: "messages",
+
+          localField: "lastMessage",
+
+          foreignField: "_id",
+
+          as: "lastMessage",
+        },
+      },
+
+      {
+        $unwind: {
+          path: "$lastMessage",
+
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      //   sort by last message
+      {
+        $sort: {
+          "lastMessage.createdAt": -1,
         },
       },
     ]);

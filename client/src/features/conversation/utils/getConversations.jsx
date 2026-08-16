@@ -7,7 +7,7 @@ async function getConversations(getToken) {
     }
 
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/conversations}`,
+      `${import.meta.env.VITE_API_URL}/api/conversations`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -16,7 +16,7 @@ async function getConversations(getToken) {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch conversation");
+      throw new Error("Failed to get conversations");
     }
 
     return await response.json();

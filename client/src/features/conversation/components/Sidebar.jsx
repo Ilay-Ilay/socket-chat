@@ -3,6 +3,7 @@ import { useState } from "react";
 import SearchResults from "./SearchResults";
 import { useAuth } from "@clerk/react";
 import Navigation from "../../../components/Navigation";
+import Conversations from "./Conversations";
 
 function Sidebar() {
   const [search, setSearch] = useState("");
@@ -89,6 +90,7 @@ function Sidebar() {
           x
         </button>
       </div>
+      <Conversations />
       <SearchResults
         isOpen={searchOpen}
         results={results}
